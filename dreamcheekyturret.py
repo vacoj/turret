@@ -1,0 +1,35 @@
+import hid, os, sys, time
+
+
+class turret():
+    def __init__(self, device):
+        self.dev = hid.device(device[0], device[1]).open()
+        # self.dev.open(device[0], device[1])
+
+    def fire(self):
+        self.dev.send_feature_report(
+            [0x02, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])
+
+    def up(self, count):
+        self.dev.send_feature_report(
+            [0x02, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])
+
+    def down(self, count):
+        self.dev.send_feature_report(
+            [0x02, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])
+
+    def left(self, count):
+        self.dev.send_feature_report(
+            [0x02, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])
+
+    def right(self, count):
+        self.dev.send_feature_report(
+            [0x02, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])
+
+    def stop(self):
+        self.dev.send_feature_report(
+            [0x02, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])
+
+
+if __name__ == '__main__':
+    turret([0x2123, 0x1010])
