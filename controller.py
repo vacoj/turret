@@ -2,15 +2,14 @@
 '''
 A little web controller for the Dream Cheeky USB turret.
 '''
-__author__ = 'Joe Vacovsky Jr.'
 
+__author__ = 'Joe Vacovsky Jr.'
 from flask import Flask, render_template, request
 from dreamcheekyturret import turret
 
-T = turret([0x2123, 0x1010])
-
 APP = Flask(__name__)
 
+T = turret()
 
 @APP.route('/', methods=["GET"])
 def main():

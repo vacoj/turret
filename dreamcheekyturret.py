@@ -1,10 +1,10 @@
-import hid, os, sys, time
-
+import os, sys, time, hid
 
 class turret():
-    def __init__(self, device):
-        self.dev = hid.device(device[0], device[1]).open()
-        # self.dev.open(device[0], device[1])
+    
+    def __init__(self):
+        self.dev = hid.device(0x2123, 0x1010)
+        self.dev.open(0x2123, 0x1010)
 
     def fire(self):
         self.dev.send_feature_report(
@@ -29,7 +29,3 @@ class turret():
     def stop(self):
         self.dev.send_feature_report(
             [0x02, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00])
-
-
-if __name__ == '__main__':
-    turret([0x2123, 0x1010])
